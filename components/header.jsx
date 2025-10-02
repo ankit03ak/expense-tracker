@@ -9,7 +9,10 @@ import ThemeToggle from "./ThemeToggle";
 const Header = async () => {
   await checkUser();
   return (
-    <div className="ffixed top-0 w-full bg-white/30 backdrop-blur-md z-50 border-b">
+    <div
+     className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700"
+    //  className="ffixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b"
+     >
             <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/">
           <Image
@@ -28,13 +31,13 @@ const Header = async () => {
             <SignedIn>
             <Link
               href={"/dashboard"}
-              className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
+              className="hover:text-blue-600 flex items-center gap-2"
             >
 
-              <Button variant="outline" className="cursor-pointer text-gray-900">
+              <Button variant="outline" className="flex items-center gap-2 cursor-pointer bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
                 <LayoutDashboard size={18} />
                 <span 
-                className="hidden md:inline text-gray-900"
+                className="hidden md:inline"
                 >Dashboard</span>
               </Button>
             </Link>
@@ -49,7 +52,9 @@ const Header = async () => {
 
         <SignedOut>
             <SignInButton forceRedirectUrl="/dashboard">
-              <Button varient="outline">Sign In</Button>
+              <Button variant="outline" className="cursor-pointer text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700">
+  Sign In
+</Button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
