@@ -18,6 +18,7 @@ import { Switch } from "@/components/ui/switch";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { ReceiptScanner } from "./receipt-scanner";
+import { cn } from "@/lib/utils";
 
 const AddTransactionForm = ({  
   accounts, 
@@ -237,11 +238,11 @@ const AddTransactionForm = ({
             <Button
               variant="outline"
               className={
-                // cn(
+                cn(
                 "w-full pl-3 text-left font-normal"
-                // ,
-                // !date && "text-muted-foreground"
-              // )
+                ,
+                !date && "text-muted-foreground"
+              )
             }
             >
               {date ? format(date, "PPP") : <span>Pick a date</span>}
@@ -276,7 +277,7 @@ const AddTransactionForm = ({
 
 
             {/* Recurring Toggle */}
-      <div className="flex flex-row items-center justify-between rounded-lg border p-3">
+      <div className="flex flex-row items-center justify-between rounded-lg border p-4">
         <div className="space-y-0.5">
           <label className="text-base font-medium">Recurring Transaction</label>
           {/* <div className="text-sm text-muted-foreground">
@@ -326,12 +327,12 @@ this acc selected defuallt
         <Button
           type="button"
           variant="outline"
-          className="w-full"
+          className="flex-1"
           onClick={() => router.back()}
         >
           Cancel
         </Button>
-        <Button type="submit" className="w-full" disabled={transactionLoading}>
+        <Button type="submit" className="flex-1" disabled={transactionLoading}>
           {transactionLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
