@@ -77,7 +77,7 @@ export async function createAccount(data) {
 }
 
 
-export async function getUserAccount(accountId) {    
+export async function getUserAccounts(accountId) {    
     try {
         const { userId } = await auth();
         if (!userId) throw new Error("Unauthorized");
@@ -114,9 +114,32 @@ export async function getUserAccount(accountId) {
 
     } catch (error) {
         // return {success: false, error: error.message};
-        throw new Error("Failed to get user account");
+        throw new Error("Failed to get user account" + error.message);
         
     }
+}
+
+
+
+export async function getDashboardData() {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // Get all user transactions
+  const transactions = await db.transaction.findMany({
+    where: { userId: user.id },
+    orderBy: { date: "desc" },
+  });
+
+  return transactions.map(serializeTransaction);
 }
 
 
@@ -243,3 +266,5 @@ export async function getUserAccount(accountId) {
 //     return { success: false, error: error.message };
 //   }
 // }
+
+

@@ -70,7 +70,7 @@ export default function Home() {
 
 
             {/* Testimonials Section */}
-      <section id="testimonials" className="py-20">
+      {/* <section id="testimonials" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">
             What Our Users Say
@@ -100,7 +100,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
 
             {/* CTA Section */}
@@ -116,7 +116,7 @@ export default function Home() {
           <Link href="/dashboard">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-blue-50 animate-bounce"
+              className="bg-white text-blue-600 hover:bg-blue-50 animate-bounce cursor-pointer"
             >
               Start Free Trial
             </Button>
