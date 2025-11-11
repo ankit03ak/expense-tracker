@@ -23,7 +23,6 @@ export async function createTransaction(data) {
     const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
-    // Get request data for ArcJet
     const req = await request();
 
     const decision = await aj.protect(req, {
@@ -69,11 +68,9 @@ export async function createTransaction(data) {
     }
 
 
-        // Calculate new balance
     const balanceChange = data.type === "EXPENSE" ? -data.amount : data.amount;
     const newBalance = account.balance.toNumber() + balanceChange;
 
-        // Create transaction and update account balance
     const transaction = await db.$transaction(async (tx) => {
       const newTransaction = await tx.transaction.create({
         data: {
@@ -135,7 +132,7 @@ export async function scanReceipt(file) {
 
   
     const arrayBuffer = await file.arrayBuffer();
-    // Convert ArrayBuffer to Base64
+    
     const base64String = Buffer.from(arrayBuffer).toString("base64");
 
     const prompt = `
@@ -225,7 +222,6 @@ export async function updateTransaction(id, data) {
 
     if (!user) throw new Error("User not found");
 
-    // Get original transaction to calculate balance change
     const originalTransaction = await db.transaction.findUnique({
       where: {
         id,
@@ -238,7 +234,6 @@ export async function updateTransaction(id, data) {
 
     if (!originalTransaction) throw new Error("Transaction not found");
 
-    // Calculate balance changes
     const oldBalanceChange =
       originalTransaction.type === "EXPENSE"
         ? -originalTransaction.amount.toNumber()
@@ -249,7 +244,6 @@ export async function updateTransaction(id, data) {
 
     const netBalanceChange = newBalanceChange - oldBalanceChange;
 
-    // Update transaction and account balance in a transaction
     const transaction = await db.$transaction(async (tx) => {
       const updated = await tx.transaction.update({
         where: {
@@ -265,7 +259,6 @@ export async function updateTransaction(id, data) {
         },
       });
 
-      // Update account balance
       await tx.account.update({
         where: { id: data.accountId },
         data: {

@@ -22,8 +22,8 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",             // 👈 add this
-    "paths": {                  // 👈 define aliases here
+    "baseUrl": ".",            
+    "paths": {                  
       "@/*": ["./*"],
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],

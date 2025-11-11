@@ -30,18 +30,16 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
 
-        {/* /header */}
         <Header />
         <main className="min-h-screen">
 
         {children}
         </main>
         <Toaster richColors />
-        {/* footer */}
-        <footer className="bg-blue-50 dark:bg-gray-900 py-12">
+        <footer className="bg-blue-50 dark:bg-gray-900 py-4">
           <div className="container mx-auto px-4 text-center text-gray-600 dark:text-gray-300">
 
-          <p>Made with NextJS</p>
+          <p>Made by Ankit Kumar </p>
           </div>
         </footer>
           </ThemeProvider>

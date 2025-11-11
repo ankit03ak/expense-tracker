@@ -49,7 +49,6 @@ const TransactionTable = ({transactions}) => {
  const filteredAndSortedTransactions = useMemo(() => {
     let result = [...transactions];
 
-    // Apply search filter
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
       result = result.filter((transaction) =>
@@ -57,9 +56,7 @@ const TransactionTable = ({transactions}) => {
       );
     }
 
-    // Apply type filter
-    
-    // Apply recurring filter
+
     if (recurringFilter) {
       result = result.filter((transaction) => {
         if (recurringFilter === "recurring") return transaction.isRecurring;
@@ -115,7 +112,6 @@ const TransactionTable = ({transactions}) => {
          : filteredAndSortedTransactions.map((t) => t.id))
     };
 
-    // console.log(selectedIds);
     const handleBulkDelete = async () => {
     if (
       !window.confirm(
@@ -336,7 +332,7 @@ const TransactionTable = ({transactions}) => {
             }}
             >
                 {transaction.type === "EXPENSE" ? "-" : "+"}
-                ${transaction.amount.toFixed(2)}
+                ₹{transaction.amount.toFixed(2)}
             </TableCell>
             <TableCell>
                 {transaction.isRecurring ? (
