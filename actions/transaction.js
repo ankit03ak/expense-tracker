@@ -10,9 +10,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// console.log(genAI)
-
-
 const serializeAmount = (obj) => ({
   ...obj,
   amount: obj.amount.toNumber(),

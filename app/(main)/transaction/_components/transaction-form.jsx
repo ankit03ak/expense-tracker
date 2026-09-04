@@ -76,6 +76,7 @@ const AddTransactionForm = ({
     const type = watch("type");
   const isRecurring = watch("isRecurring");
   const date = watch("date");
+    const category = watch("category");
 
     const filteredCategories = categories.filter(
     (category) => category.type === type
@@ -112,18 +113,29 @@ const AddTransactionForm = ({
 
 
     const handleScanComplete = (scannedData) => {
-      console.log(scannedData)
-    if (scannedData) {
-      setValue("amount", scannedData.amount.toString());
-      setValue("date", new Date(scannedData.date));
-      if (scannedData.description) {
-        setValue("description", scannedData.description);
+      if (scannedData) {
+        setValue("amount", scannedData.amount.toString());
+        setValue("date", new Date(scannedData.date));
+        if (scannedData.description) {
+          setValue("description", scannedData.description);
+        }
+        if (scannedData.category) {
+          const normalizedCategory = scannedData.category.trim().toLowerCase();
+          const matchedCategory = categories.find(
+            ({ id, name }) =>
+              id.toLowerCase() === normalizedCategory ||
+              name.toLowerCase() === normalizedCategory
+          );
+
+          if (matchedCategory) {
+            setValue("category", matchedCategory.id, {
+              shouldDirty: true,
+              shouldValidate: true,
+            });
+          }
+        }
+        toast.success("Receipt scanned successfully");
       }
-      if (scannedData.category) {
-        setValue("category", scannedData.category);
-      }
-      toast.success("Receipt scanned successfully");
-    }
   };
 
   return (
@@ -212,7 +224,7 @@ const AddTransactionForm = ({
         <label className="text-sm font-medium">Category</label>
         <Select
           onValueChange={(value) => setValue("category", value)}
-          defaultValue={getValues("category")}
+          value={category || ""}
         >
           <SelectTrigger>
             <SelectValue placeholder="Select category" />

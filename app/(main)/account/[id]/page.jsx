@@ -21,7 +21,6 @@ export default async function AccountPage({ params }) {
   }
 
   const { transactions, ...account } = accountData;
-//   console.log(account._count.transactions)
 
   return (
     <div className="space-y-8 px-5">

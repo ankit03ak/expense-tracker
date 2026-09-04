@@ -48,8 +48,6 @@ const AccountChart = ({transactions}) => {
     );
   }, [transactions, dateRange]);
 
-//   console.log(filteredData);
-
   const totals = useMemo(() => {
     return filteredData.reduce(
       (acc, day) => ({

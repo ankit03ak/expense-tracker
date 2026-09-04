@@ -11,10 +11,8 @@ import { DashboardOverview } from './_components/transaction-overview'
 const Dashboard =  async () => {
 
     const accounts = await getUserAccounts();
-    // console.log(accounts);
 
     const defaultAccount = accounts?.find((account) => account.isDefault);
-    // console.log(defaultAccount);
 
   // Get budget for default account
   let budgetData = null;
@@ -22,7 +20,6 @@ const Dashboard =  async () => {
     budgetData = await getCurrentBudget(defaultAccount.id);
   }
 
-  // console.log(budgetData)
   const transactions  = await getDashboardData();
 
   return (
